@@ -2,11 +2,6 @@
 
 . ../path.sh
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-# mpv needs another hack for linking to work
-export PATH="$DIR/../bin:$PATH"
-
 FFPATH=`pwd`/../ffmpeg/_build/out
 ASPATH=`pwd`/../libass/_build/out
 ALPATH=`pwd`/../openal-soft-android/_build/out
