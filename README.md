@@ -6,13 +6,10 @@ SDK: Download `android-sdk_r24.4.1-linux.tgz` from https://developer.android.com
 
 NDK: Download `android-ndk-r10e-linux-x86_64.bin` from https://developer.android.com/ndk/downloads/index.html and unpack to `android-ndk-r10e`
 
-## Clone repositories
+## Download dependencies
 
 ```
-git clone https://github.com/FFmpeg/FFmpeg.git
-git clone https://github.com/AerialX/openal-soft-android.git
-git clone https://github.com/xyzz/mpv-android.git
-git clone https://github.com/xyzz/mpv.git && cd mpv && git checkout android && cd ..
+./download.sh
 ```
 
 ## Install Android SDK

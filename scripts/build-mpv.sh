@@ -7,7 +7,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # mpv needs another hack for linking to work
 export PATH="$DIR/../bin:$PATH"
 
-FFPATH=`pwd`/../FFmpeg/_build/out
+FFPATH=`pwd`/../ffmpeg/_build/out
 ALPATH=`pwd`/../openal-soft-android/_build/out
 
 ./bootstrap.py
