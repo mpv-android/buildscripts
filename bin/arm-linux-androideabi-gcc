@@ -19,4 +19,6 @@ argv[0] = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "ndk-t
 if we_are_linking:
     argv += libs  # duplicate the libs here to ensure all required symbols are kept
 
-subprocess.check_output(argv)
+print argv
+
+print subprocess.check_output(argv)
