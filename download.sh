@@ -13,6 +13,7 @@ rm android-ndk-$v_ndk-linux-x86_64.bin
 # android-sdk-linux
 wget http://dl.google.com/android/android-sdk_$v_sdk-linux.tgz -O - | \
 	tar -xz -f -
+# TODO: download the actual SDK stuff here
 
 # ndk-toolchain
 cd android-ndk-$v_ndk

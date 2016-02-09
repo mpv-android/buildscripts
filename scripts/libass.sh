@@ -2,6 +2,15 @@
 
 . ../path.sh
 
+if [ "$1" == "build" ]; then
+	true
+elif [ "$1" == "clean" ]; then
+	rm -rf _build
+	exit 0
+else
+	exit 255
+fi
+
 [ -f configure ] || ./autogen.sh
 
 FTPATH=`pwd`/../freetype2/_build/out

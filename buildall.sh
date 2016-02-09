@@ -1,48 +1,62 @@
 #!/bin/bash -e
 
-CLEANBUILD=0
+cleanbuild=0
+target=mpv-android
 
-cd ffmpeg
-[ $CLEANBUILD -eq 1 ] && rm -rf _build
-../scripts/build-ffmpeg.sh
-cd ..
+# i would've used a dict but putting arrays in a dict is not a thing
 
-cd freetype2
-[ $CLEANBUILD -eq 1 ] && rm -rf _build
-../scripts/build-freetype2.sh
-cd ..
+dep_ffmpeg=()
+dep_freetype2=()
+dep_fribidi=()
+dep_libass=(freetype2 fribidi)
+dep_lua=()
+dep_openal_soft_android=()
+dep_mpv=(ffmpeg libass lua openal-soft-android)
+dep_mpv_android=(mpv)
 
-cd fribidi
-[ $CLEANBUILD -eq 1 ] && rm -rf _build
-../scripts/build-fribidi.sh
-cd ..
+getdeps () {
+	varname="dep_${1//-/_}[*]"
+	echo ${!varname}
+}
 
-# dep: freetype2, fribidi
-cd libass
-[ $CLEANBUILD -eq 1 ] && rm -rf _build
-../scripts/build-libass.sh
-cd ..
+build () {
+	if [ ! -d $1 ]; then
+		echo >&2 -e "\033[1;31mTarget $1 not found\033[m"
+		return 1
+	fi
+	echo >&2 -e "\033[1;34mBuilding $1...\033[m"
+	deps=$(getdeps $1)
+	echo >&2 "Dependencies: $deps"
+	for dep in $deps; do
+		build $dep
+	done
+	cd $1
+	[ $cleanbuild -eq 1 ] && ../scripts/$1.sh clean
+	../scripts/$1.sh build
+	cd ..
+}
 
-# cd lua
-# [ $CLEANBUILD -eq 1 ] && make clean
-# ./build.sh
-# cd ..
+usage () {
+	echo "Usage: buildall.sh [--clean] [target]"
+	echo "Builds the specified target (default: $target)"
+	echo "--clean      Clean build dirs before compiling"
+	exit 0
+}
 
-cd openal-soft-android
-[ $CLEANBUILD -eq 1 ] && rm -rf _build
-../scripts/build-openal.sh
-cd ..
+for i in "$@"; do
+	case $i in
+		--clean)
+		cleanbuild=1
+		;;
+		-h|--help)
+		usage
+		;;
+		*)
+		target=$i
+		;;
+	esac
+done
 
-# dep: ffmpeg, libass, lua, openal-soft-android
-cd mpv
-[ $CLEANBUILD -eq 1 ] && rm -rf _build
-../scripts/build-mpv.sh
-cd ..
+build $target
 
-# dep: mpv
-cd mpv-android
-[ $CLEANBUILD -eq 1 ] && rm -rf bin gen libs obj
-../scripts/build-mpv-android.sh
-cd ..
-
-ls -lh ./mpv-android/bin/MPVActivity-debug.apk
+[ "$target" == "mpv-android" ] && ls -lh ./mpv-android/bin/MPVActivity-debug.apk
