@@ -8,9 +8,11 @@
 ./download.sh
 ```
 
-## Install Android SDK
+## Install Android SDK components
 
-Run `./android-sdk-linux/tools/android` and check `Android 4.4.2 (API 19)`. You don't need things named `** system image`.
+Run `./android-sdk-linux/tools/android` and check `Android 4.4.2 (API 19)` and `Android 6.0 (API 23)`. You don't need things named `** system image`.
+
+Additionally install `Android SDK Build-tools` version 23.0.2 and `Android Support Repository`.
 
 ## Build
 
