@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
 cleanbuild=0
+nodeps=0
 target=mpv-android
 
 # i would've used a dict but putting arrays in a dict is not a thing
@@ -25,11 +26,13 @@ build () {
 		return 1
 	fi
 	echo >&2 -e "\033[1;34mBuilding $1...\033[m"
-	deps=$(getdeps $1)
-	echo >&2 "Dependencies: $deps"
-	for dep in $deps; do
-		build $dep
-	done
+	if [ $nodeps -eq 0 ]; then
+		deps=$(getdeps $1)
+		echo >&2 "Dependencies: $deps"
+		for dep in $deps; do
+			build $dep
+		done
+	fi
 	cd $1
 	[ $cleanbuild -eq 1 ] && ../scripts/$1.sh clean
 	../scripts/$1.sh build
@@ -37,9 +40,10 @@ build () {
 }
 
 usage () {
-	echo "Usage: buildall.sh [--clean] [target]"
+	echo "Usage: buildall.sh [--clean] [--no-deps] [target]"
 	echo "Builds the specified target (default: $target)"
 	echo "--clean      Clean build dirs before compiling"
+	echo "--no-deps    Do not build dependencies"
 	exit 0
 }
 
@@ -47,6 +51,9 @@ for i in "$@"; do
 	case $i in
 		--clean)
 		cleanbuild=1
+		;;
+		--no-deps)
+		nodeps=1
 		;;
 		-h|--help)
 		usage
