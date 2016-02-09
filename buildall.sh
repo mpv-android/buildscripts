@@ -66,4 +66,4 @@ done
 
 build $target
 
-[ "$target" == "mpv-android" ] && ls -lh ./mpv-android/bin/MPVActivity-debug.apk
+[ "$target" == "mpv-android" ] && ls -lh ./mpv-android/app/build/outputs/apk/app-debug.apk
