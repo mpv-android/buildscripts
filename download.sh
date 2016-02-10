@@ -49,7 +49,7 @@ cd ..
 git clone https://github.com/AerialX/openal-soft-android
 
 # mpv 
-git clone -b android https://github.com/xyzz/mpv
+git clone https://github.com/mpv-player/mpv
 
 # mpv-android
 git clone https://github.com/xyzz/mpv-android
