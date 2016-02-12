@@ -31,4 +31,3 @@ PKG_CONFIG_LIBDIR="$FFPATH/lib/pkgconfig:$ASPATH/lib/pkgconfig:$LUPATH/lib/pkgco
 
 ./waf build -p -j6
 ./waf install --destdir="`pwd`/_build/out"
-arm-linux-androideabi-strip ./_build/out/lib/libmpv.so # unstripped libraries confuse ndk-build
