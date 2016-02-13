@@ -11,5 +11,5 @@ else
 	exit 255
 fi
 
-PREFIX=`pwd`/../mpv/_build/out NDK_TOOLCHAIN_VERSION=4.9 ndk-build -C app/src/main
+FFPATH=`pwd`/../ffmpeg/_build/out PREFIX=`pwd`/../mpv/_build/out NDK_TOOLCHAIN_VERSION=4.9 ndk-build -C app/src/main
 ./gradlew assembleDebug

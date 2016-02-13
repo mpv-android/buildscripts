@@ -17,7 +17,7 @@ cd _build
 ../configure \
 	--target-os=android --enable-cross-compile --cross-prefix=arm-linux-androideabi- \
 	--arch=arm --cpu=armv7-a \
-	--enable-static --disable-shared \
+	--disable-static --enable-shared \
 	--prefix="`pwd`/out" --disable-debug --disable-doc
 
 make -j6
