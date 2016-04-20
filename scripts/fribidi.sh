@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-. ../path.sh
+. ../../path.sh
 
 if [ "$1" == "build" ]; then
 	true
@@ -20,7 +20,7 @@ PKG_CONFIG=/bin/false \
 ../configure \
 	--host=arm-linux-androideabi \
 	--enable-static --disable-shared \
-	--prefix="`pwd`/out"
+	--prefix="`pwd`/../../../prefix"
 
 make -j6
 make install

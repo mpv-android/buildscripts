@@ -1,12 +1,5 @@
-android-ndk-r10e-linux-x86_64.bin
-android-sdk-linux
-android-ndk-r10e
-ndk-toolchain
-ffmpeg
-freetype2
-fribidi
-libass
-lua
-mpv
+deps
+prefix
+sdk
+
 mpv-android
-openal-soft-android

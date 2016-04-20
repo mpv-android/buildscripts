@@ -5,15 +5,17 @@ v_ndk=r11c
 v_lua=5.2.4
 v_fribidi=0.19.7
 
-# android-ndk-$v_ndk
-wget http://dl.google.com/android/repository/android-ndk-$v_ndk-linux-x86_64.zip
-unzip android-ndk-$v_ndk-linux-x86_64.zip
-rm android-ndk-$v_ndk-linux-x86_64.zip
+mkdir -p sdk && cd sdk
 
 # android-sdk-linux
 wget http://dl.google.com/android/android-sdk_$v_sdk-linux.tgz -O - | \
 	tar -xz -f -
-# TODO: download the actual SDK stuff here
+./android-sdk-linux/tools/android update sdk --no-ui --all --filter build-tools-23.0.3,android-23,extra-android-m2repository
+
+# android-ndk-$v_ndk
+wget http://dl.google.com/android/repository/android-ndk-$v_ndk-linux-x86_64.zip
+unzip android-ndk-$v_ndk-linux-x86_64.zip
+rm android-ndk-$v_ndk-linux-x86_64.zip
 
 # ndk-toolchain
 cd android-ndk-$v_ndk
@@ -21,6 +23,10 @@ cd android-ndk-$v_ndk
 	--arch=arm --platform=android-19 --toolchain=arm-linux-androideabi-4.9 \
 	--install-dir=`pwd`/../ndk-toolchain
 cd ..
+
+cd ..
+
+mkdir -p deps && cd deps
 
 # ffmpeg
 git clone https://github.com/FFmpeg/FFmpeg ffmpeg
@@ -45,11 +51,10 @@ wget http://www.lua.org/ftp/lua-$v_lua.tar.gz -O - | \
 	tar -xz -f - --strip-components=1
 cd ..
 
-# openal-soft-android
-git clone https://github.com/AerialX/openal-soft-android
-
 # mpv 
 git clone https://github.com/mpv-player/mpv
+
+cd ..
 
 # mpv-android
 git clone https://github.com/xyzz/mpv-android

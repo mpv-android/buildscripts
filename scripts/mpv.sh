@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-. ../path.sh
+. ../../path.sh
 
 if [ "$1" == "build" ]; then
 	true
@@ -11,18 +11,10 @@ else
 	exit 255
 fi
 
-FFPATH=`pwd`/../ffmpeg/_build/out
-ASPATH=`pwd`/../libass/_build/out
-LUPATH=`pwd`/../lua/_build/out
-ALPATH=`pwd`/../openal-soft-android/_build/out
-# required by libass:
-FTPATH=`pwd`/../freetype2/_build/out
-FBPATH=`pwd`/../fribidi/_build/out
-
 [ -f waf ] || ./bootstrap.py
 
 CC=arm-linux-androideabi-gcc \
-PKG_CONFIG_LIBDIR="$FFPATH/lib/pkgconfig:$ASPATH/lib/pkgconfig:$LUPATH/lib/pkgconfig:$ALPATH/lib/pkgconfig:$FTPATH/lib/pkgconfig:$FBPATH/lib/pkgconfig" \
+PKG_CONFIG_LIBDIR="`pwd`/../../prefix/lib/pkgconfig" \
 ./waf configure \
 	--disable-iconv --lua=52 \
 	--enable-libmpv-shared \
@@ -30,4 +22,4 @@ PKG_CONFIG_LIBDIR="$FFPATH/lib/pkgconfig:$ASPATH/lib/pkgconfig:$LUPATH/lib/pkgco
 	-o "`pwd`/_build"
 
 ./waf build -p -j6
-./waf install --destdir="`pwd`/_build/out"
+./waf install --destdir="`pwd`/../../prefix"

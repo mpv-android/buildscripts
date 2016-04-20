@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-. ../path.sh
+. ../../path.sh
 
 if [ "$1" == "build" ]; then
 	true
@@ -18,7 +18,7 @@ cd _build
 	--target-os=android --enable-cross-compile --cross-prefix=arm-linux-androideabi- \
 	--arch=arm --cpu=armv7-a --enable-jni --enable-mediacodec \
 	--disable-static --enable-shared \
-	--prefix="`pwd`/out" --disable-debug --disable-doc
+	--prefix="`pwd`/../../../prefix" --disable-debug --disable-doc
 
 make -j6
 make install

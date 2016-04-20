@@ -11,7 +11,6 @@ dep_freetype2=()
 dep_fribidi=()
 dep_libass=(freetype2 fribidi)
 dep_lua=()
-dep_openal_soft_android=()
 dep_mpv=(ffmpeg libass lua)
 dep_mpv_android=(mpv)
 
@@ -21,7 +20,7 @@ getdeps () {
 }
 
 build () {
-	if [ ! -d $1 ]; then
+	if [ ! -d $1 ] && [ ! -d deps/$1 ]; then
 		echo >&2 -e "\033[1;31mTarget $1 not found\033[m"
 		return 1
 	fi
@@ -33,10 +32,16 @@ build () {
 			build $dep
 		done
 	fi
-	cd $1
-	[ $cleanbuild -eq 1 ] && ../scripts/$1.sh clean
-	../scripts/$1.sh build
-	cd ..
+	if [ "$1" == "mpv-android" ]; then
+		pushd $1
+		BUILDSCRIPT=../scripts/$1.sh
+	else
+		pushd deps/$1
+		BUILDSCRIPT=../../scripts/$1.sh
+	fi
+	[ $cleanbuild -eq 1 ] && $BUILDSCRIPT clean
+	$BUILDSCRIPT build
+	popd
 }
 
 usage () {
