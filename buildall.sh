@@ -12,7 +12,7 @@ dep_fribidi=()
 dep_libass=(freetype2 fribidi)
 dep_lua=()
 dep_openal_soft_android=()
-dep_mpv=(ffmpeg libass lua openal-soft-android)
+dep_mpv=(ffmpeg libass lua)
 dep_mpv_android=(mpv)
 
 getdeps () {

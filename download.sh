@@ -1,14 +1,14 @@
 #!/bin/bash -e
 
 v_sdk=r24.4.1
-v_ndk=r10e
+v_ndk=r11c
 v_lua=5.2.4
 v_fribidi=0.19.7
 
 # android-ndk-$v_ndk
-wget http://dl.google.com/android/ndk/android-ndk-$v_ndk-linux-x86_64.bin
-7z x android-ndk-$v_ndk-linux-x86_64.bin
-rm android-ndk-$v_ndk-linux-x86_64.bin
+wget http://dl.google.com/android/repository/android-ndk-$v_ndk-linux-x86_64.zip
+unzip android-ndk-$v_ndk-linux-x86_64.zip
+rm android-ndk-$v_ndk-linux-x86_64.zip
 
 # android-sdk-linux
 wget http://dl.google.com/android/android-sdk_$v_sdk-linux.tgz -O - | \

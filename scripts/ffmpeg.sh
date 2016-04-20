@@ -16,7 +16,7 @@ cd _build
 
 ../configure \
 	--target-os=android --enable-cross-compile --cross-prefix=arm-linux-androideabi- \
-	--arch=arm --cpu=armv7-a \
+	--arch=arm --cpu=armv7-a --enable-jni --enable-mediacodec \
 	--disable-static --enable-shared \
 	--prefix="`pwd`/out" --disable-debug --disable-doc
 

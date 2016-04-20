@@ -21,12 +21,12 @@ FBPATH=`pwd`/../fribidi/_build/out
 
 [ -f waf ] || ./bootstrap.py
 
-CC=arm-linux-androideabi-gcc LDFLAGS="-llog -lOpenSLES" \
+CC=arm-linux-androideabi-gcc \
 PKG_CONFIG_LIBDIR="$FFPATH/lib/pkgconfig:$ASPATH/lib/pkgconfig:$LUPATH/lib/pkgconfig:$ALPATH/lib/pkgconfig:$FTPATH/lib/pkgconfig:$FBPATH/lib/pkgconfig" \
 ./waf configure \
-	--enable-android --disable-iconv --enable-openal --lua=52 \
+	--disable-iconv --lua=52 \
 	--enable-libmpv-shared \
-	--prefix=/ --disable-debug-build --disable-manpage-build \
+	--prefix=/ --disable-manpage-build \
 	-o "`pwd`/_build"
 
 ./waf build -p -j6
