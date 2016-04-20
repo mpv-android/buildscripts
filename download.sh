@@ -57,4 +57,4 @@ git clone https://github.com/mpv-player/mpv
 cd ..
 
 # mpv-android
-git clone https://github.com/xyzz/mpv-android
+git clone https://github.com/mpv-android/mpv-android
