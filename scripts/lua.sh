@@ -5,7 +5,6 @@
 if [ "$1" == "build" ]; then
 	true
 elif [ "$1" == "clean" ]; then
-	rm -r _build
 	make clean
 	exit 0
 else
@@ -18,9 +17,9 @@ make CC="arm-linux-androideabi-gcc -Dgetlocaledecpoint\(\)=\(\'.\'\)" PLAT=linux
 
 # TO_BIN=/dev/null disables installing lua & luac
 make INSTALL_TOP=`pwd`/../../prefix TO_BIN=/dev/null install
-mkdir -p _build/out/lib/pkgconfig
 
 # make pc only generates a partial pkg-config file because ????
+mkdir -p ../../prefix/lib/pkgconfig
 make INSTALL_TOP=`pwd`/../../prefix pc > ../../prefix/lib/pkgconfig/lua.pc
 cat >>../../prefix/lib/pkgconfig/lua.pc <<'EOF'
 Name: Lua
