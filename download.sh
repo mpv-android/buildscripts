@@ -8,9 +8,20 @@ v_fribidi=0.19.7
 . ./path.sh # load $os var
 
 if [ "$os" == "linux" ]; then
+	# get 32bit deps
+	hash yum &> /dev/null && sudo yum install zlib.i686 ncurses-libs.i686 bzip2-libs.i686
+	apt-get -v &> /dev/null && sudo apt-get install lib32z1 lib32ncurses5 lib32stdc++6
+
 	sdk_ext="tgz"
 	os_ndk="linux"
 elif [ "$os" == "macosx" ]; then
+	if hash brew 2>/dev/null; then
+ 		brew install automake autoconf libtool coreutils
+ 	else
+ 		echo "Error: brew not found. You need to install homebrew. http://brew.sh"
+ 		exit 255
+	fi	
+ 	# get osx deps for building from brew
 	sdk_ext="zip"
 	os_ndk="darwin"
 	if hash ginstall 2>/dev/null; then
