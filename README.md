@@ -30,18 +30,15 @@ adb logcat -s "mpv" # get only mpv logs
 If you've made changes to a single component (e.g. ffmpeg or mpv) and want a new build you can of course just run ./buildall.sh but it's also possible to just build a single component like this:
 
 ```
-cd deps/ffmpeg
-# optional: ../../scripts/ffmpeg.sh clean
-../../scripts/ffmpeg.sh build
-cd ../..
+./buildall.sh --no-deps ffmpeg
+# optional: add --clean to build from a clean state
 ```
 
 Afterwards, build mpv-android and install the apk:
 
 ```
-cd mpv-android
-../scripts/mpv-android.sh build
-adb install -r app/build/outputs/apk/app-debug.apk
+./buildall.sh --no-deps mpv-android
+adb install -r ./mpv-android/app/build/outputs/apk/app-debug.apk
 ```
 
 ## Using Android Studio
@@ -55,8 +52,7 @@ If Android Studio complains about project sync failing (`Error:Exception thrown 
 Note that if you build from Android Studio only the Java part will be built. If you make any changes to libraries (ffmpeg, mpv, ...) or mpv-android native code (`app/src/main/jni/*`), first rebuild native code with:
 
 ```
-cd mpv-android
-../scripts/mpv-android.sh build
+./buildall.sh --no-deps mpv-android
 ```
 
 then build the project from Android Studio.
@@ -68,15 +64,14 @@ Also, debugging native code does not work from within the studio at the moment, 
 You first need to rebuild mpv-android with gdbserver support:
 
 ```
-cd mpv-android
-NDK_DEBUG=1 ../scripts/mpv-android.sh build
-adb install -r app/build/outputs/apk/app-debug.apk
+NDK_DEBUG=1 ./buildall.sh --no-deps mpv-android
+adb install -r ./mpv-android/app/build/outputs/apk/app-debug.apk
 ```
 
 After that, ndk-gdb can be used to debug the app:
 
 ```
-cd app/src/main/
+cd mpv-android/app/src/main/
 ../../../../sdk/android-ndk-r*/ndk-gdb --launch
 ```
 
