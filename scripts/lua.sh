@@ -11,7 +11,8 @@ else
 	exit 255
 fi
 
-# FIXME: multiarch doesn't work correctly yet (built in src dir)
+# Building seperately from source tree is not supported, this means we are forced to always clean
+$0 clean
 
 # LUA_T= and LUAC_T= disable building lua & luac
 # -Dgetlocaledecpoint()=('.') fixes bionic missing decimal_point in localeconv
