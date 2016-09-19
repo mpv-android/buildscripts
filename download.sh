@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 v_sdk=r24.4.1
-v_ndk=r11c
+v_ndk=r12b
 v_lua=5.2.4
 v_fribidi=0.19.7
 
@@ -24,12 +24,6 @@ elif [ "$os" == "macosx" ]; then
  	# get osx deps for building from brew
 	sdk_ext="zip"
 	os_ndk="darwin"
-	if hash ginstall 2>/dev/null; then
-		true
-	else
-		echo "Error: ginstall not found. You probably need GNU coreutils."
-		exit 255
-	fi
 fi
 
 mkdir -p sdk && cd sdk
@@ -52,9 +46,13 @@ rm "android-ndk-${v_ndk}-${os_ndk}-x86_64.zip"
 
 # ndk-toolchain
 cd "android-ndk-${v_ndk}"
+toolchain_plat=android-21
 ./build/tools/make-standalone-toolchain.sh \
-	--arch=arm --platform=android-19 --toolchain=arm-linux-androideabi-4.9 \
+	--arch=arm --platform=$toolchain_plat --toolchain=arm-linux-androideabi-4.9 \
 	--install-dir=`pwd`/../ndk-toolchain
+./build/tools/make-standalone-toolchain.sh \
+	--arch=arm64 --platform=$toolchain_plat --toolchain=aarch64-linux-android-4.9 \
+	--install-dir=`pwd`/../ndk-toolchain-arm64
 cd ..
 
 cd ..

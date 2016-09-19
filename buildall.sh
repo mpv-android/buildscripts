@@ -3,6 +3,7 @@
 cleanbuild=0
 nodeps=0
 target=mpv-android
+arch=armv7l
 
 # i would've used a dict but putting arrays in a dict is not a thing
 
@@ -17,6 +18,21 @@ dep_mpv_android=(mpv)
 getdeps () {
 	varname="dep_${1//-/_}[*]"
 	echo ${!varname}
+}
+
+loadarch () {
+	if [ "$1" == "armv7l" ]; then
+		export ndk_suffix=
+		export ndk_triple=arm-linux-androideabi
+		export dir_suffix=
+	elif [ "$1" == "arm64" ]; then
+		export ndk_suffix=-arm64
+		export ndk_triple=aarch64-linux-android
+		export dir_suffix=64
+	else
+		echo "Invalid architecture"
+		exit 1
+	fi
 }
 
 build () {
@@ -45,30 +61,37 @@ build () {
 }
 
 usage () {
-	echo "Usage: buildall.sh [--clean] [--no-deps] [target]"
+	echo "Usage: buildall.sh [options] [target]"
 	echo "Builds the specified target (default: $target)"
-	echo "--clean      Clean build dirs before compiling"
-	echo "--no-deps    Do not build dependencies"
+	echo "--clean        Clean build dirs before compiling"
+	echo "--no-deps      Do not build dependencies"
+	echo "--arch <arch>  Build for specified architecture (default: $arch; supported: armv7l, arm64)"
 	exit 0
 }
 
-for i in "$@"; do
-	case $i in
+while [ $# -gt 0 ]; do
+	case "$1" in
 		--clean)
 		cleanbuild=1
 		;;
 		--no-deps)
 		nodeps=1
 		;;
+		--arch)
+		shift
+		arch=$1
+		;;
 		-h|--help)
 		usage
 		;;
 		*)
-		target=$i
+		target=$1
 		;;
 	esac
+	shift
 done
 
+loadarch $arch
 build $target
 
 [ "$target" == "mpv-android" ] && ls -lh ./mpv-android/app/build/outputs/apk/app-debug.apk

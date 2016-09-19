@@ -1,5 +1,7 @@
 deps
-prefix
 sdk
 
 mpv-android
+
+prefix
+prefix64
