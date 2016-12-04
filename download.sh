@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 v_sdk=r24.4.1
-v_ndk=r12b
+v_ndk=r13b
 v_lua=5.2.4
 v_fribidi=0.19.7
 
@@ -46,13 +46,13 @@ rm "android-ndk-${v_ndk}-${os_ndk}-x86_64.zip"
 
 # ndk-toolchain
 cd "android-ndk-${v_ndk}"
-toolchain_plat=android-21
-./build/tools/make-standalone-toolchain.sh \
-	--arch=arm --platform=$toolchain_plat --toolchain=arm-linux-androideabi-4.9 \
-	--install-dir=`pwd`/../ndk-toolchain
-./build/tools/make-standalone-toolchain.sh \
-	--arch=arm64 --platform=$toolchain_plat --toolchain=aarch64-linux-android-4.9 \
-	--install-dir=`pwd`/../ndk-toolchain-arm64
+toolchain_api=21
+./build/tools/make_standalone_toolchain.py \
+	--arch arm --api $toolchain_api \
+	--install-dir `pwd`/../ndk-toolchain
+./build/tools/make_standalone_toolchain.py \
+	--arch arm64 --api $toolchain_api \
+	--install-dir `pwd`/../ndk-toolchain-arm64
 cd ..
 
 cd ..
