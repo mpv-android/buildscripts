@@ -11,6 +11,7 @@
 ## Build
 
 ```
+./buildall.sh --arch arm64 mpv
 ./buildall.sh
 ```
 
@@ -34,6 +35,8 @@ If you've made changes to a single component (e.g. ffmpeg or mpv) and want a new
 # optional: add --clean to build from a clean state
 ```
 
+Note that you might need to rebuild for arm64 depending on your device by adding `--arch arm64` to the command above.
+
 Afterwards, build mpv-android and install the apk:
 
 ```
@@ -43,7 +46,7 @@ adb install -r ./mpv-android/app/build/outputs/apk/app-debug.apk
 
 ## Using Android Studio
 
-You can use Android Studio to develop the Java part of the codebase. Before using it, make sure to build the project at least once with `./buildall.sh`.
+You can use Android Studio to develop the Java part of the codebase. Before using it, make sure to build the project at least once by following the steps in the **Build** section.
 
 You should point Android Studio to existing SDK installation at `mpv-android-build/sdk/android-sdk-linux`. Then click "Open an existing Android Studio project" and select `mpv-android-build/mpv-android`.
 
