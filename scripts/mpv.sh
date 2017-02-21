@@ -13,8 +13,12 @@ fi
 
 [ -f waf ] || ./bootstrap.py
 
+extrald=
+[[ "$ndk_triple" == "aarch64"* ]] && extrald="-fuse-ld=gold"
+
 CC=$ndk_triple-gcc \
 PKG_CONFIG_LIBDIR="`pwd`/../../prefix$dir_suffix/lib/pkgconfig" \
+LDFLAGS="$extrald" \
 ./waf configure \
 	--disable-iconv --lua=52 \
 	--enable-libmpv-shared \
