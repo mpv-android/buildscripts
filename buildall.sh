@@ -7,7 +7,8 @@ arch=armv7l
 
 # i would've used a dict but putting arrays in a dict is not a thing
 
-dep_ffmpeg=()
+dep_openssl=()
+dep_ffmpeg=(openssl)
 dep_freetype2=()
 dep_fribidi=()
 dep_libass=(freetype2 fribidi)

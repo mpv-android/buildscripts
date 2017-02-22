@@ -4,6 +4,7 @@ v_sdk=r24.4.1
 v_ndk=r13b
 v_lua=5.2.4
 v_fribidi=0.19.7
+v_openssl=1.1.0e
 
 . ./path.sh # load $os var
 
@@ -58,6 +59,13 @@ cd ..
 cd ..
 
 mkdir -p deps && cd deps
+
+# openssl
+mkdir openssl
+cd openssl
+wget https://www.openssl.org/source/openssl-$v_openssl.tar.gz -O - | \
+	tar -xz -f - --strip-components=1
+cd ..
 
 # ffmpeg
 git clone https://github.com/FFmpeg/FFmpeg ffmpeg
