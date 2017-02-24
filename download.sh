@@ -4,6 +4,8 @@ v_sdk=r24.4.1
 v_ndk=r13b
 v_lua=5.2.4
 v_fribidi=0.19.7
+v_gnutls=3.5.11
+v_nettle=3.3
 
 . ./path.sh # load $os var
 
@@ -58,6 +60,20 @@ cd ..
 cd ..
 
 mkdir -p deps && cd deps
+
+# nettle
+mkdir nettle
+cd nettle
+wget https://ftp.gnu.org/gnu/nettle/nettle-$v_nettle.tar.gz -O - | \
+	tar -xz -f - --strip-components=1
+cd ..
+
+# gnutls
+mkdir gnutls
+cd gnutls
+wget ftp://ftp.gnutls.org/gcrypt/gnutls/v${v_gnutls%.*}/gnutls-$v_gnutls.tar.xz -O - | \
+	tar -xJ -f - --strip-components=1
+cd ..
 
 # ffmpeg
 git clone https://github.com/FFmpeg/FFmpeg ffmpeg
