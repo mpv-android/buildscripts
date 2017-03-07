@@ -55,11 +55,14 @@ toolchain_api=21
 ./build/tools/make_standalone_toolchain.py \
 	--arch arm64 --api $toolchain_api \
 	--install-dir `pwd`/../ndk-toolchain-arm64
-for tc in ndk-toolchain ndk-toolchain-arm64; do
+./build/tools/make_standalone_toolchain.py \
+	--arch x86_64 --api $toolchain_api \
+	--install-dir `pwd`/../ndk-toolchain-x64
+for tc in ndk-toolchain{,-arm64,-x64}; do
 	pushd ../$tc
 
 	rm -rf bin/py* lib/{lib,}py* # remove python because it can cause breakage
-	# add gas-preprocessor.pl for ffmpeg + clang
+	# add gas-preprocessor.pl for ffmpeg + clang on ARM
 	wget "https://git.libav.org/?p=gas-preprocessor.git;a=blob_plain;f=gas-preprocessor.pl;hb=HEAD" \
 		-O bin/gas-preprocessor.pl
 	chmod +x bin/gas-preprocessor.pl

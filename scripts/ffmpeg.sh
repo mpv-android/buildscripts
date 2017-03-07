@@ -16,6 +16,7 @@ cd _build$dir_suffix
 
 cpu=armv7-a
 [[ "$ndk_triple" == "aarch64"* ]] && cpu=armv8-a
+[[ "$ndk_triple" == "x86_64"* ]] && cpu=generic
 
 cpuflags="-ftree-vectorize"
 [[ "$ndk_triple" == "arm"* ]] && cpuflags="$cpuflags -mfpu=neon -mcpu=cortex-a8"

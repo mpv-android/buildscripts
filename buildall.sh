@@ -32,6 +32,10 @@ loadarch () {
 		export ndk_suffix=-arm64
 		export ndk_triple=aarch64-linux-android
 		export dir_suffix=64
+	elif [ "$1" == "x86_64" ]; then
+		export ndk_suffix=-x64
+		export ndk_triple=x86_64-linux-android
+		export dir_suffix=-x64
 	else
 		echo "Invalid architecture"
 		exit 1
@@ -74,7 +78,7 @@ usage () {
 	echo "--clean        Clean build dirs before compiling"
 	echo "--no-deps      Do not build dependencies"
 	echo "--clang        Use clang compiler"
-	echo "--arch <arch>  Build for specified architecture (default: $arch; supported: armv7l, arm64)"
+	echo "--arch <arch>  Build for specified architecture (default: $arch; supported: armv7l, arm64, x86_64)"
 	exit 0
 }
 
