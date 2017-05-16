@@ -55,6 +55,12 @@ toolchain_api=21
 ./build/tools/make_standalone_toolchain.py \
 	--arch arm64 --api $toolchain_api \
 	--install-dir `pwd`/../ndk-toolchain-arm64
+for tc in ndk-toolchain ndk-toolchain-arm64; do
+	# remove python from toolchain as it can cause breakage
+	pushd ../$tc
+	rm bin/py*
+	rm -rf lib/{lib,}py*
+	popd
 cd ..
 
 cd ..
