@@ -16,6 +16,7 @@
 ```
 
 Run `buildall.sh` with `--clean` to clean the build directories before building.
+Additionally `--clang` is supported to switch from GCC to Clang for building.
 
 # Developing
 

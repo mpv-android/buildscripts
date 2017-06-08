@@ -16,7 +16,7 @@ $0 clean
 
 # LUA_T= and LUAC_T= disable building lua & luac
 # -Dgetlocaledecpoint()=('.') fixes bionic missing decimal_point in localeconv
-make CC="$ndk_triple-gcc -Dgetlocaledecpoint\(\)=\(\'.\'\)" \
+make CC="$CC -Dgetlocaledecpoint\(\)=\(\'.\'\)" \
 	AR="$ndk_triple-ar r" \
 	RANLIB="$ndk_triple-ranlib" \
 	PLAT=linux LUA_T= LUAC_T= -j6

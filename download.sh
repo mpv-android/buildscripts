@@ -56,10 +56,11 @@ toolchain_api=21
 	--arch arm64 --api $toolchain_api \
 	--install-dir `pwd`/../ndk-toolchain-arm64
 for tc in ndk-toolchain ndk-toolchain-arm64; do
-	# remove python from toolchain as it can cause breakage
 	pushd ../$tc
-	rm bin/py*
-	rm -rf lib/{lib,}py*
+	rm -rf bin/py* lib/{lib,}py* # remove python because it can cause breakage
+	wget "https://git.libav.org/?p=gas-preprocessor.git;a=blob_plain;f=gas-preprocessor.pl;hb=HEAD" \
+		-O gas-preprocessor.pl # add gas-preprocessor.pl ffmpeg+clang
+	chmod +x gas-preprocessor.pl
 	popd
 cd ..
 

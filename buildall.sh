@@ -2,6 +2,7 @@
 
 cleanbuild=0
 nodeps=0
+clang=0
 target=mpv-android
 arch=armv7l
 
@@ -35,6 +36,11 @@ loadarch () {
 		echo "Invalid architecture"
 		exit 1
 	fi
+	if [ $clang -eq 1 ]; then
+		export CC=$ndk_triple-clang
+	else
+		export CC=$ndk_triple-gcc
+	fi
 }
 
 build () {
@@ -67,6 +73,7 @@ usage () {
 	echo "Builds the specified target (default: $target)"
 	echo "--clean        Clean build dirs before compiling"
 	echo "--no-deps      Do not build dependencies"
+	echo "--clang        Use clang compiler"
 	echo "--arch <arch>  Build for specified architecture (default: $arch; supported: armv7l, arm64)"
 	exit 0
 }
@@ -78,6 +85,9 @@ while [ $# -gt 0 ]; do
 		;;
 		--no-deps)
 		nodeps=1
+		;;
+		--clang)
+		clang=1
 		;;
 		--arch)
 		shift

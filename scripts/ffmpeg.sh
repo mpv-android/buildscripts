@@ -20,7 +20,7 @@ cpu=armv7-a
 prefix="`pwd`/../../../prefix$dir_suffix"
 PKG_CONFIG_LIBDIR="$prefix/lib/pkgconfig" \
 ../configure \
-	--target-os=android --enable-cross-compile --cross-prefix=$ndk_triple- \
+	--target-os=android --enable-cross-compile --cross-prefix=$ndk_triple- --cc=$CC \
 	--arch=${ndk_triple%%-*} --cpu=$cpu --enable-{jni,mediacodec,gmp,gnutls} \
 	--extra-cflags="-I$prefix/include" --extra-ldflags="-L$prefix/lib" \
 	--disable-static --enable-shared --enable-version3 \
