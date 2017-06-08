@@ -14,9 +14,13 @@ fi
 mkdir -p _build$dir_suffix
 cd _build$dir_suffix
 
+extra=
+[[ "$ndk_triple" == "aarch64"* && "$CC" == *"clang" ]] \
+	&& extra="--disable-hardware-acceleration"
+
 PKG_CONFIG_LIBDIR="`pwd`/../../../prefix$dir_suffix/lib/pkgconfig" \
 ../configure \
-	--host=$ndk_triple \
+	--host=$ndk_triple $extra \
 	--enable-static --disable-shared \
 	--with-nettle-mini --with-included-{libtasn1,unistring} \
 	--disable-{doc,tools,cxx,tests} --without-p11-kit \
