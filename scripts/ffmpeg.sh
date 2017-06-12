@@ -17,8 +17,8 @@ cd _build$dir_suffix
 cpu=armv7-a
 [[ "$ndk_triple" == "aarch64"* ]] && cpu=armv8-a
 
-cpuflags="-mfpu=neon"
-[[ "$ndk_triple" == "arm"* ]] && cpuflags="$cpuflags -mcpu=cortex-a8"
+cpuflags="-ftree-vectorize"
+[[ "$ndk_triple" == "arm"* ]] && cpuflags="$cpuflags -mfpu=neon -mcpu=cortex-a8"
 
 prefix="`pwd`/../../../prefix$dir_suffix"
 PKG_CONFIG_LIBDIR="$prefix/lib/pkgconfig" \
