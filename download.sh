@@ -62,6 +62,7 @@ for tc in ndk-toolchain ndk-toolchain-arm64; do
 		-O gas-preprocessor.pl # add gas-preprocessor.pl ffmpeg+clang
 	chmod +x gas-preprocessor.pl
 	popd
+done
 cd ..
 
 cd ..
