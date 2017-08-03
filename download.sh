@@ -132,3 +132,8 @@ cd ..
 
 # mpv-android
 git clone https://github.com/mpv-android/mpv-android
+
+# youtube-dl
+wget https://kitsunemimi.pw/ytdl/dist.zip
+mkdir -p mpv-android/app/src/main/assets/ytdl
+unzip dist.zip -o -d mpv-android/app/src/main/assets/ytdl && rm dist.zip
