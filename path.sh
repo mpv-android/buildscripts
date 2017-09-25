@@ -6,5 +6,5 @@ os=linux
 [[ "$OSTYPE" == "darwin"* ]] && os=macosx
 export os
 
-export PATH="$DIR/sdk/ndk-toolchain$ndk_suffix/bin:$DIR/sdk/android-ndk-r14b:$DIR/sdk/android-sdk-$os/tools:$PATH"
+export PATH="$DIR/sdk/ndk-toolchain$ndk_suffix/bin:$DIR/sdk/android-ndk-r15c:$DIR/sdk/android-sdk-$os/tools:$PATH"
 export ANDROID_HOME="$DIR/sdk/android-sdk-$os"

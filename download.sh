@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 v_sdk=r24.4.1
-v_ndk=r14b
+v_ndk=r15c
 v_lua=5.2.4
 v_fribidi=0.19.7
 v_gnutls=3.6.0
@@ -57,10 +57,18 @@ toolchain_api=21
 	--install-dir `pwd`/../ndk-toolchain-arm64
 for tc in ndk-toolchain ndk-toolchain-arm64; do
 	pushd ../$tc
+
 	rm -rf bin/py* lib/{lib,}py* # remove python because it can cause breakage
+	# add gas-preprocessor.pl for ffmpeg + clang
 	wget "https://git.libav.org/?p=gas-preprocessor.git;a=blob_plain;f=gas-preprocessor.pl;hb=HEAD" \
-		-O gas-preprocessor.pl # add gas-preprocessor.pl ffmpeg+clang
-	chmod +x gas-preprocessor.pl
+		-O bin/gas-preprocessor.pl
+	chmod +x bin/gas-preprocessor.pl
+	# make wrapper to pass api level to gcc (due to Unified Headers)
+	exe=`echo bin/*-linux-android*-gcc`
+	mv $exe{,.real}
+	printf '#!/bin/sh\nexec $0.real -D__ANDROID_API__=%s "$@"\n' $toolchain_api >$exe
+	chmod +x $exe
+
 	popd
 done
 cd ..
