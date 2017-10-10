@@ -11,12 +11,21 @@
 ## Build
 
 ```
-./buildall.sh --arch arm64 mpv
 ./buildall.sh
 ```
 
 Run `buildall.sh` with `--clean` to clean the build directories before building.
-Additionally `--clang` is supported to switch from GCC to Clang for building.
+Additionally `--clang` is supported to switch to Clang for compilation.
+
+Building for just 32-bit ARM (which is the default) is fine generally.
+However if you want to make use of AArch64 or are targeting Intel x86 devices,
+these architectures can be optionally be built into the same APK.
+
+To do this run one (or both) of these commands **before** ./buildall.sh:
+```
+./buildall.sh --arch arm64 mpv
+./buildall.sh --arch x86_64 mpv
+```
 
 # Developing
 
@@ -36,7 +45,7 @@ If you've made changes to a single component (e.g. ffmpeg or mpv) and want a new
 # optional: add --clean to build from a clean state
 ```
 
-Note that you might need to rebuild for arm64 depending on your device by adding `--arch arm64` to the command above.
+Note that you might need to be rebuild for other architectures (`--arch`) too depending on your device.
 
 Afterwards, build mpv-android and install the apk:
 
