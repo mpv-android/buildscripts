@@ -11,5 +11,14 @@ else
 	exit 255
 fi
 
-PREFIX=`pwd`/../prefix/ PREFIX64=`pwd`/../prefix64 NDK_TOOLCHAIN_VERSION=4.9 ndk-build -C app/src/main
+if [ -f ../prefix64/lib/libmpv.so ]; then
+	prefix64=$PWD/../prefix64
+else
+	echo >&2 "Warning: libmpv.so not found in native prefix for arm64, support will be omitted"
+	prefix64=
+fi
+
+PREFIX=$PWD/../prefix PREFIX64=$prefix64 \
+NDK_TOOLCHAIN_VERSION=4.9 \
+ndk-build -C app/src/main
 ./gradlew assembleDebug
