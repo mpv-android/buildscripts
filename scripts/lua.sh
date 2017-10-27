@@ -21,11 +21,8 @@ make CC="$CC -Dgetlocaledecpoint\(\)=\(\'.\'\)" \
 	RANLIB="$ndk_triple-ranlib" \
 	PLAT=linux LUA_T= LUAC_T= -j6
 
-INSTALL=install
-[ "$os" == "macosx" ] && INSTALL=ginstall
-
 # TO_BIN=/dev/null disables installing lua & luac
-make INSTALL="$INSTALL" INSTALL_TOP=`pwd`/../../prefix$dir_suffix TO_BIN=/dev/null install
+make INSTALL=${INSTALL:-install} INSTALL_TOP=`pwd`/../../prefix$dir_suffix TO_BIN=/dev/null install
 
 # make pc only generates a partial pkg-config file because ????
 mkdir -p ../../prefix$dir_suffix/lib/pkgconfig

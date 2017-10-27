@@ -17,13 +17,20 @@ if [ "$os" == "linux" ]; then
 	sdk_ext="tgz"
 	os_ndk="linux"
 elif [ "$os" == "macosx" ]; then
-	if hash brew 2>/dev/null; then
- 		brew install automake autoconf libtool coreutils
- 	else
- 		echo "Error: brew not found. You need to install homebrew. http://brew.sh"
- 		exit 255
-	fi	
- 	# get osx deps for building from brew
+	if ! hash brew 2>/dev/null; then
+		echo "Error: brew not found. You need to install Homebrew: https://brew.sh/"
+		exit 255
+	fi
+	brew install \
+		automake autoconf libtool pkg-config \
+		coreutils gnu-sed wget
+	if ! java -version &>/dev/null; then
+		echo "Error: missing Java 8 runtime. Manually install it or use:"
+		echo "\$ brew tap caskroom/versions"
+		echo "\$ brew cask install java8"
+		exit 255
+	fi
+
 	sdk_ext="zip"
 	os_ndk="darwin"
 fi
@@ -31,10 +38,10 @@ fi
 mkdir -p sdk && cd sdk
 
 # android-sdk-linux
-if [ "$os" == "linux" ]; then
+if [ "$sdk_ext" == "tgz" ]; then
 	wget "http://dl.google.com/android/android-sdk_${v_sdk}-${os}.${sdk_ext}" -O - | \
 		tar -xz -f -
-elif [ "$os" == "macosx" ]; then
+elif [ "$sdk_ext" == "zip" ]; then
 	wget "http://dl.google.com/android/android-sdk_${v_sdk}-${os}.${sdk_ext}"
 	unzip "android-sdk_${v_sdk}-${os}.${sdk_ext}"
 	rm "android-sdk_${v_sdk}-${os}.${sdk_ext}"
