@@ -110,6 +110,7 @@ done
 loadarch $arch
 build $target
 
-[ "$target" == "mpv-android" ] && ls -lh ./mpv-android/app/build/outputs/apk/app-debug.apk
+[ "$target" == "mpv-android" ] && \
+	ls -lh ./mpv-android/app/build/outputs/apk/debug/app-debug.apk
 
 exit 0

@@ -51,7 +51,7 @@ Afterwards, build mpv-android and install the apk:
 
 ```
 ./buildall.sh --no-deps mpv-android
-adb install -r ./mpv-android/app/build/outputs/apk/app-debug.apk
+adb install -r ./mpv-android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
 ## Using Android Studio
@@ -78,7 +78,7 @@ You first need to rebuild mpv-android with gdbserver support:
 
 ```
 NDK_DEBUG=1 ./buildall.sh --no-deps mpv-android
-adb install -r ./mpv-android/app/build/outputs/apk/app-debug.apk
+adb install -r ./mpv-android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
 After that, ndk-gdb can be used to debug the app:
