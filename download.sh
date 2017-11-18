@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 v_sdk=r24.4.1
-v_ndk=r15c
+v_ndk=r16
 v_lua=5.2.4
 v_fribidi=0.19.7
 v_gnutls=3.6.0
@@ -47,7 +47,7 @@ elif [ "$sdk_ext" == "zip" ]; then
 	rm "android-sdk_${v_sdk}-${os}.${sdk_ext}"
 fi
 "./android-sdk-${os}/tools/android" update sdk --no-ui --all --filter \
-	build-tools-26.0.1,android-25,extra-android-m2repository,platform-tools
+	build-tools-26.0.2,android-25,extra-android-m2repository,platform-tools
 
 # android-ndk-$v_ndk
 wget "http://dl.google.com/android/repository/android-ndk-${v_ndk}-${os_ndk}-x86_64.zip"
