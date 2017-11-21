@@ -111,8 +111,8 @@ git clone git://git.sv.nongnu.org/freetype/freetype2.git
 # fribidi
 mkdir fribidi
 cd fribidi
-wget http://fribidi.org/download/fribidi-$v_fribidi.tar.bz2 -O - | \
-	tar -xj -f - --strip-components=1
+wget https://github.com/fribidi/fribidi/archive/$v_fribidi.tar.gz -O - | \
+	tar -xz -f - --strip-components=1
 cd ..
 
 # libass
