@@ -11,8 +11,10 @@ v_nettle=3.3
 
 if [ "$os" == "linux" ]; then
 	# get 32bit deps
-	hash yum &> /dev/null && sudo yum install zlib.i686 ncurses-libs.i686 bzip2-libs.i686
-	apt-get -v &> /dev/null && sudo apt-get install lib32z1 lib32ncurses5 lib32stdc++6
+	hash yum &> /dev/null && sudo yum install zlib.i686 ncurses-libs.i686 bzip2-libs.i686 \
+		autoconf m4 pkgconfig libtool
+	apt-get -v &> /dev/null && sudo apt-get install lib32z1 lib32ncurses5 lib32stdc++6 \
+		autoconf m4 pkg-config libtool
 
 	sdk_ext="tgz"
 	os_ndk="linux"
