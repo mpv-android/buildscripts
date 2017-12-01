@@ -3,7 +3,9 @@
 v_sdk=r24.4.1
 v_ndk=r16
 v_lua=5.2.4
+v_libass=0.14.0
 v_fribidi=0.19.7
+v_freetype=2-8-1
 v_gnutls=3.6.0
 v_nettle=3.3
 
@@ -108,7 +110,7 @@ cd ..
 git clone https://github.com/FFmpeg/FFmpeg ffmpeg
 
 # freetype2
-git clone git://git.sv.nongnu.org/freetype/freetype2.git
+git clone git://git.sv.nongnu.org/freetype/freetype2.git -b VER-$v_freetype
 
 # fribidi
 mkdir fribidi
@@ -118,7 +120,7 @@ wget https://download.videolan.org/contrib/fribidi/fribidi-$v_fribidi.tar.bz2 -O
 cd ..
 
 # libass
-git clone https://github.com/libass/libass
+git clone https://github.com/libass/libass -b $v_libass
 
 # lua
 mkdir lua
