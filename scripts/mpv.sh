@@ -20,7 +20,7 @@ PKG_CONFIG_LIBDIR="`pwd`/../../prefix$dir_suffix/lib/pkgconfig" \
 LDFLAGS="$extrald" \
 ./waf configure \
 	--disable-iconv --lua=52 \
-	--enable-libmpv-shared --enable-ffmpeg-upstream \
+	--enable-libmpv-shared \
 	--prefix=/ --disable-manpage-build \
 	-o "`pwd`/_build$dir_suffix"
 
